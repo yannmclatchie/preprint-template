@@ -1,0 +1,101 @@
+\pdfoutput=1 % ensure pdflatex
+\documentclass[10pt,twoside]{mathdoc}
+
+% passing the option `sans` will result in sans serif 
+% distribution names
+% \usepackage{distoperators}
+\usepackage[sans]{distoperators}
+
+% tip: using the `IEEEeqnarray` environment is much nicer
+% than the `aligned` environment
+\usepackage{IEEEtrantools}
+
+% define proposition environment
+\newtheorem{prop}{Proposition}
+% we can define any other amsthm environments and
+% benefit from the same style
+
+% dummy text
+\usepackage{lipsum}
+
+\title{Sample document}
+\keywords{keyword 1; phrase 2.} % keywords are optional
+\author[1]{First Author\thanks{This is a thanks footnote.}}
+\author[2]{Second Author}
+\affil[1]{Department One, Institution One, Address One}
+\affil[2]{Department Two, Institution Two, Address Two}
+% \author{First Author}
+% \author{Second Author}
+% \affil{Shared Department, Shared Institution, Shared Address}
+\date{}
+
+% set running title and authors
+\makeatletter
+\def\runauthor{F. Author and S. Author}
+\def\runtitle{Running title}
+\makeatother
+
+\begin{document}
+\maketitle
+\thispagestyle{empty}
+%
+\begin{abstract}
+    \lipsum[11]
+\end{abstract}
+%
+%
+\section{Ordinary text}
+%
+We reference \citet{KullbackLeibler}, before continuing our discussion.
+%
+\subsection{Subsections are in sans serif too}
+%
+\lipsum[2]
+%
+\subsubsection{Even subsubsections are taken care of!}
+%
+\lipsum[3]
+%
+\paragraph{And paragraphs!}
+%
+\lipsum[11]
+%
+\section{Mathematics}
+%
+We interest ourselves in the variables
+%
+\begin{IEEEeqnarray}{rl}
+    X\;&\sim\normal(100, 0.5) \nonumber \\
+    Y\;&\sim\Cauchy(0, 2.5). \nonumber
+\end{IEEEeqnarray}
+%
+Note how much prettier these look.\footnote{They look good to me}
+
+We have also defined some handy mathematics operators. For example, perhaps the following is true
+%
+\begin{equation}
+    \E{X} = \E[x\sim \mathbb{P}_n]{x}?\label{eq:my-eq}
+\end{equation}
+%
+Now let's get serious with our first proposition.
+%
+\begin{prop}
+    Equation~\ref{eq:my-eq} is almost always correct under some assumptions.
+\end{prop}
+
+If we would rather not prove this, then we can talk instead about \elpdPlain, or even \elpdHatPlain if we're feeling fancy. Other mathematics functions can be found in \texttt{distoperators.sty}.
+%
+\begin{appendices}
+%
+\section{An example appendix}
+%
+\lipsum[4-12]
+%
+\end{appendices}
+%
+\subsubsection*{Acknowledgments}
+We acknowledge all kinds of things.
+%
+\bibliography{sample}
+%
+\end{document}

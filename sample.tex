@@ -1,0 +1,104 @@
+\pdfoutput=1 % ensure pdflatex
+% \documentclass[11pt, twoside]{predoc}
+\documentclass[10pt, twoside]{predoc2}
+
+% passing the option `sans` will result in sans serif 
+% distribution names
+% \usepackage{distoperators}
+\usepackage[sans]{distoperators}
+
+% tip: using the `IEEEeqnarray` environment is much nicer
+% than the `aligned` environment
+\usepackage{IEEEtrantools}
+
+% custom proposition environment
+\newtheoremstyle{mystyle}%                % Name
+  {}%                                     % Space above
+  {}%                                     % Space below
+  {\itshape}%                             % Body font
+  {}%                                     % Indent amount
+  {\bfseries\sffamily}%                   % Theorem head font
+  {.}%                                    % Punctuation after theorem head
+  { }%                                    % Space after theorem head, ' ', or \newline
+  {}%                                     % Theorem head spec (can be left empty, meaning `normal')
+\theoremstyle{mystyle}
+\newtheorem{prop}{Proposition}
+% we can define any other amsthm environments and
+% benefit from the same style
+
+% dummy text
+\usepackage{lipsum}
+
+\title{Sample document}
+% \title{This is a much longer title name than necessary but will be useful to showcase the title block}
+\author[1]{First Author\thanks{This is a thanks footnote.}}
+\author[2]{Second Author}
+\affil[1]{Department One, Institution One, Address One}
+\affil[2]{Department Two, Institution Two, Address Two}
+\date{}
+
+% set running title and authors
+\makeatletter
+\def\runauthor{F. Author et al.}
+\def\runtitle{Running title}
+\makeatother
+
+\begin{document}
+\maketitle
+\thispagestyle{empty}
+%
+\begin{abstract}
+    \lipsum[11]\lipsum[12]
+\end{abstract}
+%
+\begin{keywords}
+    first topic; another keyword; and a third.
+\end{keywords}
+%
+\section{Ordinary text}
+%
+We reference \citet{KullbackLeibler}, before continuing our discussion. \lipsum[1-3]
+%
+\subsection{Subsections are in sans serif too}
+%
+\lipsum[2]
+%
+\paragraph{Even paragraphs are in sans serif}
+%
+\lipsum[3]
+%
+\section{Mathematics}
+%
+We interest ourselves in the variables
+%
+\begin{IEEEeqnarray}{rl}
+    X\;&\sim\normal(100, 0.5) \nonumber \\
+    Y\;&\sim\Cauchy(0, 2.5). \nonumber
+\end{IEEEeqnarray}
+%
+Note how much prettier these look\footnote{They look good to me}
+
+We have also defined some handy mathematics operators. For example, perhaps the following is true
+%
+\begin{equation}
+    \E{X} = \E[x\sim \mathbb{P}_n]{x}?\label{eq:my-eq}
+\end{equation}
+%
+Now let's get serious with our first proposition.
+%
+\begin{prop}
+    Equation~\ref{eq:my-eq} is almost always correct under some assumptions.
+\end{prop}
+
+If we would rather not prove this, then we can talk instead about \elpdPlain, or even \elpdHatPlain if we're feeling fancy. Other mathematics functions can be found in \texttt{distoperators.sty}.
+%
+\section{Buffer text and its advantages}
+%
+\lipsum
+%
+\subsection*{Acknowledgments}
+We acknowledge all kinds of things.
+%
+\bibliography{sample}
+%
+\end{document}

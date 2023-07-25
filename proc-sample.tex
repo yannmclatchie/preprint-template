@@ -1,0 +1,89 @@
+\pdfoutput=1 % ensure pdflatex
+% \documentclass[11pt, twoside]{procdoc}
+\documentclass[11pt, twoside]{procdoc2}
+
+% tip: using the `IEEEeqnarray` environment is much nicer
+% than the `aligned` environment
+\usepackage{IEEEtrantools}
+
+% for the appendix
+\usepackage[title]{appendix}
+
+% dummy text
+\usepackage{lipsum}
+
+\title{Sample document}
+% \title{This is a much longer title name than necessary but will be useful to showcase the title block}
+\author[1]{First Author\thanks{This is a thanks footnote.}}
+\author[2]{Second Author}
+\affil[1]{Department One, Institution One, Address One}
+\affil[2]{Department Two, Institution Two, Address Two}
+\date{}
+
+% set running title and authors
+\makeatletter
+\def\runauthor{F. Author and S. Author}
+\def\runtitle{Running title}
+\makeatother
+
+\begin{document}
+\thispagestyle{empty}
+%
+\twocolumn[
+  \maketitle
+  \begin{onecolabstract}
+    This is where the abstract goes. Be sure to copy and paste this structure when using this format.
+  \end{onecolabstract}
+  %
+  \begin{keywords} %% Optional
+    keyword 1; phrase 2; keyword 3.
+  \end{keywords}
+]
+%
+\section{Ordinary text}
+%
+\lipsum[1]
+
+We reference \citet{KullbackLeibler}, before continuing our discussion: \lipsum[2]
+
+We are also interested in maths, such as Equation~\ref{eq:1}.
+%
+\begin{equation}
+    x = y. \label{eq:1}
+\end{equation}
+%
+\lipsum[3]
+%
+Check out the wide Equation~\ref{eq:wideeq}!
+%
+\begin{wideeqn}
+\mathcal{R}^{(\text{d})}=
+ g_{\sigma_2}^e
+ \left(
+   \frac{[\Gamma^Z(3,21)]_{\sigma_1}}{Q_{12}^2-M_W^2}
+  +\frac{[\Gamma^Z(13,2)]_{\sigma_1}}{Q_{13}^2-M_W^2}
+ \right)
+ + x_WQ_e
+ \left(
+   \frac{[\Gamma^\gamma(3,21)]_{\sigma_1}}{Q_{12}^2-M_W^2}
+  +\frac{[\Gamma^\gamma(13,2)]_{\sigma_1}}{Q_{13}^2-M_W^2}
+ \right)\;. \label{eq:wideeq}
+\end{wideeqn}
+
+\lipsum[4-8]
+%
+\subsection*{Acknowledgments}
+We acknowledge all kinds of things.
+%
+\bibliography{sample}
+%
+% The appendix to the paper can be made one column
+%
+\onecolumn
+\appendix
+%
+\section{Appendix}
+%
+\lipsum[12-15]
+%
+\end{document}

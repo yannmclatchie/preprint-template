@@ -1,0 +1,169 @@
+% distoperators.sty
+% Convenient mathematics operators and functions
+% 14.09.2022 Yann McLatchie and Noa Kallioinen
+% ---
+\ProvidesPackage{distoperators}[14.09.2022 Distribution operators]
+\NeedsTeXFormat{LaTeX2e}
+\RequirePackage{amsmath}
+
+%% Words in mathematics
+%% ---
+\newcommand*{\iidsim}{\ensuremath{\overset{\text{\normalfont iid}}{\sim}}}
+\newcommand*{\normal}{\mathrm{normal}}
+\newcommand*{\mvn}{\mathrm{MVN}}
+\newcommand*{\uniform}{\mathrm{uniform}}
+\newcommand*{\Bernoulli}{\mathrm{Bernoulli}}
+\newcommand*{\gammadist}{\mathrm{gamma}}
+\newcommand*{\expdist}{\mathrm{exponential}}
+\newcommand*{\betadist}{\mathrm{beta}}
+\newcommand*{\Cauchy}{\mathrm{Cauchy}}
+\newcommand*{\Dirichlet}{\mathrm{Dirichlet}}
+\newcommand*{\student}{\mathrm{Student-}}
+\newcommand{\studentt}{\student t}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\newcommand*{\Var}{\mathrm{Var}}
+
+%% Common variable names
+\newcommand*{\ytest}{y_{\text{test}}}
+\newcommand*{\ynew}{\tilde{y}}
+
+%% Programming language and package name styles
+%% ---
+\newcommand{\pkg}[1]{{\fontseries{b}\selectfont #1}}
+\let\proglang=\textsf
+
+%% LOO-related commands
+%% ---
+% Expected elpd $e-elpd(Ma)$
+\newcommand*{\eelpd}[1]{{\text{e-elpd}\bigr(#1\bigl)}}
+% elpd $elpd(Ma|Y)$
+\newcommand*{\elpd}[2]{{\mathrm{elpd}\bigr(#1 \mid #2\bigl)}}
+
+% lpd $lpd(Ma|Y)$
+\newcommand*{\lpd}[2]{{\mathrm{lpd}\bigr(#1 \mid #2\bigl)}}
+
+% lpd hat
+\newcommand*{\lpdHat}[2]{{\widehat{\mathrm{lpd}}\bigr(#1 \mid #2\bigl)}}
+
+% $\widehat{elpd}_{LOO}(Ma | Y)$
+\newcommand*{\elpdHat}[2]{{\widehat{\mathrm{elpd}}_\mathrm{\scriptscriptstyle LOO}\bigr(#1 \mid #2\bigl)}}
+
+% $\widehat{elpd}_{test}(Ma | Y)$
+\newcommand*{\elpdHatTest}[2]{{\widehat{\mathrm{elpd}}_\mathrm{test}\bigr(#1 \mid #2\bigl)}}
+
+% $unc_{LOO}(Ma | Y)$
+\newcommand*{\elpdHatUnk}[2]{{\mathrm{unc}_\mathrm{\scriptscriptstyle LOO}\bigr(#1 \mid #2\bigl)}}
+
+% $\widehat{unc}_{LOO}(Ma | Y)$
+\newcommand*{\elpdHatUnkHat}[2]{{\widehat{\mathrm{unc}}_\mathrm{\scriptscriptstyle LOO}\bigr(#1 \mid #2\bigl)}}
+
+% $err_{LOO}(Ma | Y)$
+\newcommand*{\elpdHatErr}[2]{{\mathrm{err}_\mathrm{\scriptscriptstyle LOO}\bigr(#1 \mid #2\bigl)}}
+
+% $err_{LOO}(Ma | Y)$
+\newcommand*{\elpdHatErrEE}[3]{{\mathrm{err}_\mathrm{\scriptscriptstyle LOO}^{#3}\bigr(#1 \mid #2\bigl)}}
+
+% $\widehat{err}_{LOO}(Ma | Y)$
+\newcommand*{\elpdHatErrHat}[2]{{\widehat{\mathrm{err}}_\mathrm{\scriptscriptstyle LOO}\bigr(#1 \mid #2\bigl)}}
+
+% $\widehat{elpd}_{LOO,i}(Ma \ Y)$ 
+\newcommand*{\elpdHati}[3]{{\widehat{\mathrm{elpd}}_{\mathrm{\scriptscriptstyle LOO},\, #3}\bigr(#1 \mid #2\bigl)}}
+
+% $\widehat{elpd}_{test,i}(Ma \ Y)$ 
+\newcommand*{\elpdHatTesti}[3]{{\widehat{\mathrm{elpd}}_{\mathrm{test},\, #3}\bigr(#1 \mid #2\bigl)}}
+
+
+% $\widehat{SE}_{LOO}(Ma | Y)$
+\newcommand*{\seHat}[2]{{\widehat{\mathrm{SE}}_\mathrm{\scriptscriptstyle LOO}\bigr(#1 \mid #2\bigl)}}
+
+% $\widehat{SE}_{test}(Ma | Y)$
+\newcommand*{\seHatTest}[2]{{\widehat{\mathrm{SE}}_\mathrm{test}\bigr(#1 \mid #2\bigl)}}
+
+
+% M_k, M_a, M_b
+\newcommand*{\Mk}{\ensuremath{\mathrm{M}_k}}
+\newcommand*{\Ma}{\ensuremath{\mathrm{M}_a}}
+\newcommand*{\Mb}{\ensuremath{\mathrm{M}_b}}
+
+
+% (M_a,M_b)
+\newcommand*{\Md}{{\ensuremath{\mathrm{M}_a,\mathrm{M}_b}}}
+
+% $(M_A,M_B)$
+\newcommand*{\Mfd}{{\ensuremath{\mathrm{M_A,M_B}}}}
+
+% $sv^elpd(M_a | Y)$
+\newcommand*{\elpdC}[2]{{\mathrm{elpd}\bigr(#1 \mid #2\bigl)}}
+
+% sv^elpd_{LOO}(M_a | Y)
+\newcommand*{\elpdHatC}[2]{{\widehat{\mathrm{elpd}}_\mathrm{\scriptscriptstyle LOO}\bigr(#1 \mid #2\bigl)}}
+
+% $sv^unc_{LOO}(M_a | Y)$
+\newcommand*{\elpdHatUnkC}[2]{{\mathrm{unc}_\mathrm{\scriptscriptstyle LOO}\bigr(#1 \mid #2\bigl)}}
+
+% $sv^\widehat{unc}_{LOO}(M{a | Y)$
+\newcommand*{\elpdHatUnkHatC}[2]{{\widehat{\mathrm{unc}}_\mathrm{\scriptscriptstyle LOO}\bigr(#1 \mid #2\bigl)}}
+
+% $sv^err_{LOO}(M_a | Y)$
+\newcommand*{\elpdHatErrEEC}[3]{{\mathrm{err}_\mathrm{\scriptscriptstyle LOO}^{#3}\bigr(#1 \mid #2\bigl)}}
+
+% $sv^err_{LOO}(M_a | Y)$
+\newcommand*{\elpdHatErrC}[2]{{\mathrm{err}_\mathrm{\scriptscriptstyle LOO}\bigr(#1 \mid #2\bigl)}}
+
+% $sv^\wideta{err}_{LOO}(M_a | Y)$
+\newcommand*{\elpdHatErrHatC}[2]{{\widehat{\mathrm{err}}_\mathrm{\scriptscriptstyle LOO}\bigr(#1 \mid #2\bigl)}}
+
+% $sv^\widehat{elpd}_{LOO, i}(M_a | Y)$ 
+\newcommand*{\elpdHatiC}[3]{{\widehat{\mathrm{elpd}}_{\mathrm{\scriptscriptstyle LOO},\, #3}\bigr(#1 \mid #2\bigl)}}
+
+% $sv^SE_{LOO}(M_a | Y)$
+\newcommand*{\seHatC}[2]{{\widehat{\mathrm{SE}}_\mathrm{\scriptscriptstyle LOO}\bigr(#1 \mid #2\bigl)}}
+
+% $elpd$
+\newcommand*{\lpdPlain}{{\ensuremath{\text{lpd}}}}
+\newcommand*{\elpdPlain}{{\ensuremath{\mathrm{elpd}}}}
+\newcommand*{\eelpdPlain}{{\ensuremath{\text{e-elpd}}}}
+
+% $elpd_{LOO}$
+\newcommand*{\elpdHatPlain}{{\ensuremath{\widehat{\mathrm{elpd}}_\mathrm{\scriptscriptstyle LOO}}}}
+
+% $unc_{LOO}$
+\newcommand*{\elpdHatUnkPlain}{{\mathrm{unc}_\mathrm{\scriptscriptstyle LOO}}}
+
+% $unc_{LOO}$
+\newcommand*{\elpdHatUnkHatPlain}{{\widehat{\mathrm{unc}}_\mathrm{\scriptscriptstyle LOO}}}
+
+% $err_{LOO}$
+\newcommand*{\elpdHatErrPlain}{{\mathrm{err}_\mathrm{\scriptscriptstyle LOO}}}
+
+% $\widehat{err}_{LOO}$
+\newcommand*{\elpdHatErrHatPlain}{{\widehat{\mathrm{err}}_\mathrm{\scriptscriptstyle LOO}}}
+
+% $SE_{LOO}$
+\newcommand*{\seHatPlain}{{\ensuremath{\widehat{\mathrm{SE}}_\mathrm{\scriptscriptstyle LOO}}}}
+
+%% Mathematics functions
+%% ---
+% Variance
+\newcommand*{\var}[1]{{\mathrm{Var}\bigr(#1\bigl)}}
+% Expectation
+\makeatletter
+\def\E{\@ifnextchar[{\@with}{\@without}}
+\def\@with[#1]#2{\ensuremath{\mathbb{E}_{#1}\left[#2\right]}}
+\def\@without#1{\ensuremath{\mathbb{E}\left[#1\right]}}
+\makeatother
+\newcommand{\pr}[1]{\mathbb{P}(#1)}
+
+%% Font family option
+%% ---
+\DeclareOption{sans}{
+    \DeclareSymbolFont{sfoperators}{OT1}{cmss}{m}{n}
+    \DeclareSymbolFontAlphabet{\mathsf}{sfoperators}
+    % change operator font to sans serif
+    \makeatletter
+    \def\operator@font{\mathgroup\symsfoperators}
+    \makeatother
+}
+\DeclareOption*{\PackageWarning{distoperators}{Unknown ‘\CurrentOption’}}
+\ProcessOptions\relax
