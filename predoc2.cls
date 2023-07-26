@@ -39,6 +39,7 @@
 \titleformat*{\subsection}{\large\bfseries\sffamily}
 \titleformat*{\subsubsection}{\itshape\sffamily}
 \titleformat*{\paragraph}{\bfseries\sffamily}
+
 % make abstract title \sffamily
 \RequirePackage[runin]{abstract}
 \renewcommand\abstractnamefont{\bfseries\sffamily}
