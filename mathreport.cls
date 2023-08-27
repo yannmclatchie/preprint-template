@@ -1,9 +1,9 @@
-% procdoc.cls
-% Proceedings template class
+% mathdoc.cls
+% Mathematical article template class
 % 01.09.2022 Yann McLatchie yann.mclatchie (at) aalto.fi
 % --- Class structure: identification part
 % ---
-\ProvidesClass{procdoc2}[19/07/2023 version 1.00 proceedings template]
+\ProvidesClass{mathreport}[01.09.2022 version 1.00 Mathematics short report template]
 \NeedsTeXFormat{LaTeX2e}
 
 % --- Class structure: declaration of options part
@@ -20,7 +20,12 @@
 
 % --- Class structure: declaration of options part
 % ---
-\LoadClass[twocolumn]{article}
+\LoadClass[twoside]{article}
+
+% Make the document ragged right
+\RequirePackage{ragged2e}
+\setlength{\RaggedRightParindent}{2em}
+\AtBeginDocument{\RaggedRight}
 
 % Use custom fonts
 \RequirePackage[utf8]{inputenc}
@@ -30,79 +35,78 @@
 \RequirePackage{amsmath,amsthm}
 \RequirePackage[varg]{newtxmath}
 
+% Change font colour
+\RequirePackage{xcolor}
+\definecolor{brgreen}{HTML}{004225}
+\AtBeginDocument{\color{brgreen}}
+
 % Finer resolution type
 \RequirePackage{microtype}
 
 % Section heads and title
 \RequirePackage{titlesec}
-\titleformat*{\section}{\raggedright\Large\bfseries\sffamily}
-\titleformat*{\subsection}{\raggedright\large\bfseries\sffamily}
-\titleformat*{\subsubsection}{\raggedright\bfseries\sffamily}
-\titleformat*{\paragraph}{\bfseries\sffamily}
-
-% Wide equation environment
-\newenvironment{wideeqn}[1][!ht]% 
-{% begin code
-    \begin{figure*}[#1]%
-    \par\noindent\rule{\dimexpr(0.5\textwidth-0.5\columnsep-0.4pt)}{0.4pt}%
-    \rule{0.4pt}{6pt}%
-    \begin{equation}%
-}%
-{% end code
-    \end{equation}%
-    \vspace{\belowdisplayskip}\hfill\rule[-6pt]{0.4pt}{6.4pt}%
-    \rule{\dimexpr(0.5\textwidth-0.5\columnsep-1pt)}{0.4pt}%
-    \end{figure*}%
-}%
-
-%% Changeable parameters.
-\newlength\aftertitskip   
-\setlength\aftertitskip{0.3in plus 0.2in minus 0.2in}
-
-% Author block
-\RequirePackage{authblk}
-\renewcommand{\Authfont}{\normalsize \sffamily}
-\renewcommand{\Affilfont}{\small \itshape \rmfamily}
-\setlength{\affilsep}{2pt}
-
-% Title
-% penalise hyphens in the title
-\def\@maketitle{\vspace*{-0.3in}%
-\vbox{\hsize\textwidth
-%\linewidth\hsize \vskip 0.1in \toptitlebar \centering
-\noindent{\raggedright\Huge\bf\sffamily \@title\par}\vskip \aftertitskip
-%\bottomtitlebar % \vskip 0.1in %  minus
-{\large%
- \begin{flushleft}%
-    \noindent \@author
- \end{flushleft}%
- \par}}}
-
-% Redefine abstract
+\titleformat{name=\section}[leftmargin]%
+  {\sffamily\bfseries\filleft}
+  {\thesection.}
+  {.5em}{}
+\titleformat{\subsection}[runin]%
+  {\mdseries\sffamily}
+  {\thesubsection.}
+  {1em}
+  {}
+\titleformat{\subsubsection}[runin]%
+  {\sffamily\slshape\mdseries}
+  {\thesubsubsection.}
+  {1em}
+  {}
+\titleformat*{\paragraph}{\itshape\sffamily}
+\titlespacing{\section}%
+ {1in}{1em}{1em}
+ 
+% Custom abstract
 \RequirePackage[runin]{abstract}
-\setlength{\absleftindent}{0.15\textwidth}
-\setlength{\absrightindent}{\absleftindent}
-\renewcommand\abstractnamefont{\itshape\sffamily}
-\abslabeldelim{.\,\,}
+\renewcommand\abstractnamefont{\bfseries\sffamily}
+\renewcommand{\abstractname}{Summary.}
 
-% Add keywords
-\newenvironment{keywords}
-{%
-  \makeatletter
-  \renewcommand\abstractnamefont{\itshape\sffamily}
-  \renewcommand\abstractname{Keywords}
-  \abslabeldelim{:\,\,}
-  \makeatother
-  \onecolabstract
-}{%
-  \endonecolabstract\vspace{0.3in}
+% Blank footnotes for the keywords
+\let\svthefootnote\thefootnote
+\newcommand\blankfootnote[1]{%
+  \let\thefootnote\relax\footnotetext{#1}%
+  \let\thefootnote\svthefootnote%
 }
+\newcommand\keywords[1]{\renewcommand\@keywords{#1}}
+\newcommand\@keywords{}
+
+% Custom title section
+\makeatletter
+\def\@maketitle{%
+\newpage%
+\null%
+\begin{center}%
+    \vspace*{-5em} %
+    \let\footnote\thanks %
+    {\sffamily\bfseries\Large \@title %
+      \if\@keywords\@empty\else
+        \blankfootnote{\textit{Keywords:}\/ \@keywords}
+      \fi %
+      \par 
+    }
+    {\large
+     \lineskip .5em
+     \begin{tabular}[t]{c}
+        \baselineskip=12pt
+        \@author
+     \end{tabular}
+    }
+\end{center}
+}
+\makeatother
 
 % Custom captions
 \RequirePackage{caption}
 \DeclareCaptionFormat{custom}
 {%
-    {\small\sffamily#1#2} {\small #3}
+    {\small\sffamily#1#2} \small #3
 }
 \DeclareCaptionLabelSeparator{custom}{.}
 \captionsetup{format=custom, labelsep=custom}
@@ -110,19 +114,24 @@
 % Page layout
 \RequirePackage[
     a4paper,
-    margin=15mm,
+    left=2in,
+    right=1in,
+    top=1in,
+    bottom=1in,
     includehead,
-    includefoot
+    includefoot,
+    asymmetric
 ]{geometry}
 
 % Penalties
 \widowpenalty=10000
 \clubpenalty=10000
 
-% Margin distance
-\makeatletter
-\setlength{\columnsep}{10mm}
-\makeatother
+% Author block
+\RequirePackage{authblk}
+\renewcommand{\Authfont}{\normalsize \mdseries}
+\renewcommand{\Affilfont}{\small \itshape}
+\setlength{\affilsep}{2pt}
 
 % Headers and footers
 \RequirePackage{fancyhdr}
@@ -135,8 +144,8 @@
 }
 \fancypagestyle{followingpage}{%
 \fancyhf{} % clear all six fields
-\fancyhead[CO]{{\sffamily \mdseries \runauthor}}
-\fancyhead[CE]{{\sffamily \mdseries \runtitle}}
+\fancyhead[CO]{{\sffamily \runauthor}}
+\fancyhead[CE]{{\sffamily \runtitle}}
 \fancyfoot[CE,CO]{\sffamily \thepage}
 \renewcommand{\headrulewidth}{0pt}
 \renewcommand{\footrulewidth}{0pt}
@@ -172,14 +181,15 @@
   {}{}
 \makeatother
 
-% Hyper-references
+% Hyperrefs
 \RequirePackage[
     colorlinks=true,
-    linkcolor=red,
-    filecolor=black,
-    citecolor=black,      
-    urlcolor=black,
+    linkcolor=brgreen,
+    filecolor=brgreen,
+    citecolor=brgreen,      
+    urlcolor=brgreen,
 ]{hyperref}
+\RequirePackage{url}
 \renewcommand\UrlFont{\ttfamily}
 
 % Mathematical environments
@@ -188,7 +198,7 @@
   {}%                                     % Space below
   {\itshape}%                             % Body font
   {}%                                     % Indent amount
-  {\bfseries\sffamily}%                   % Theorem head font
+  {\bfseries\sffamily\scshape}%                   % Theorem head font
   {.}%                                    % Punctuation after theorem head
   { }%                                    % Space after theorem head, ' ', or \newline
   {}%                                     % Theorem head spec (can be left empty, meaning `normal')
