@@ -1,5 +1,5 @@
 \pdfoutput=1 % ensure pdflatex
-\documentclass[10pt,twoside]{mathdoc}
+\documentclass[10pt]{mathreport}
 
 % passing the option `sans` will result in sans serif 
 % distribution names
@@ -10,6 +10,9 @@
 % than the `aligned` environment
 \usepackage{IEEEtrantools}
 
+% For ppendices
+\usepackage[title]{appendix}
+
 % define proposition environment
 \newtheorem{prop}{Proposition}
 % we can define any other amsthm environments and
@@ -18,15 +21,9 @@
 % dummy text
 \usepackage{lipsum}
 
-\title{Sample document}
+\title{Sample document\thanks{F. Author is Position at Institution X; S. Author is Position at Institution Y.}}
 \keywords{keyword 1; phrase 2.} % keywords are optional
-\author[1]{First Author\thanks{This is a thanks footnote.}}
-\author[2]{Second Author}
-\affil[1]{Department One, Institution One, Address One}
-\affil[2]{Department Two, Institution Two, Address Two}
-% \author{First Author}
-% \author{Second Author}
-% \affil{Shared Department, Shared Institution, Shared Address}
+\author{First Author and Second Author}
 
 % set running title and authors
 \makeatletter
@@ -47,11 +44,11 @@
 %
 We reference \citet{KullbackLeibler}, before continuing our discussion.
 %
-\subsection{Subsections are in sans serif too}
+\subsection{Sub-sections are in sans serif too}
 %
 \lipsum[2]
 %
-\subsubsection{Even subsubsections are taken care of!}
+\subsubsection{Even sub-sub-sections are taken care of!}
 %
 \lipsum[3]
 %
@@ -95,6 +92,6 @@ If we would rather not prove this, then we can talk instead about \elpdPlain, or
 \subsubsection*{Acknowledgments}
 We acknowledge all kinds of things.
 %
-\bibliography{sample}
+\bibliography{sample.bib}
 %
 \end{document}

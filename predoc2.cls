@@ -158,3 +158,15 @@
     urlcolor=black,
 ]{hyperref}
 \renewcommand\UrlFont{\ttfamily}
+
+% Mathematical environments
+\newtheoremstyle{mathdoc}%                % Name
+  {}%                                     % Space above
+  {}%                                     % Space below
+  {\itshape}%                             % Body font
+  {}%                                     % Indent amount
+  {\bfseries\sffamily}%                   % Theorem head font
+  {.}%                                    % Punctuation after theorem head
+  { }%                                    % Space after theorem head, ' ', or \newline
+  {}%                                     % Theorem head spec (can be left empty, meaning `normal')
+\theoremstyle{mathdoc}
