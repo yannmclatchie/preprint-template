@@ -38,6 +38,7 @@
 % Change font colour
 \RequirePackage{xcolor}
 \definecolor{brgreen}{HTML}{004225}
+\definecolor{complimred}{HTML}{42001D}
 \AtBeginDocument{\color{brgreen}}
 
 % Finer resolution type
@@ -45,23 +46,27 @@
 
 % Section heads and title
 \RequirePackage{titlesec}
-\titleformat{name=\section}[leftmargin]%
-  {\sffamily\bfseries\filleft}
+% \titleformat{name=\section}[leftmargin]%
+%   {\sffamily\bfseries\filleft}
+%   {\thesection.}
+%   {.5em}{}
+\titleformat{\section}[runin]%
+  {\sffamily\bfseries}
   {\thesection.}
-  {.5em}{}
+  {1em}{}
 \titleformat{\subsection}[runin]%
-  {\mdseries\sffamily}
+  {\itshape\mdseries\sffamily}
   {\thesubsection.}
   {1em}
   {}
 \titleformat{\subsubsection}[runin]%
-  {\sffamily\slshape\mdseries}
+  {\sffamily\mdseries}
   {\thesubsubsection.}
   {1em}
   {}
 \titleformat*{\paragraph}{\itshape\sffamily}
-\titlespacing{\section}%
- {1in}{1em}{1em}
+% \titlespacing{\section}%
+%  {1.5in}{1em}{1em}
  
 % Custom abstract
 \RequirePackage[runin]{abstract}
@@ -114,8 +119,8 @@
 % Page layout
 \RequirePackage[
     a4paper,
-    left=2in,
-    right=1in,
+    left=1in,
+    right=2in,
     top=1in,
     bottom=1in,
     includehead,
@@ -186,7 +191,7 @@
     colorlinks=true,
     linkcolor=brgreen,
     filecolor=brgreen,
-    citecolor=brgreen,      
+    citecolor=brgreen,
     urlcolor=brgreen,
 ]{hyperref}
 \RequirePackage{url}
@@ -198,7 +203,7 @@
   {}%                                     % Space below
   {\itshape}%                             % Body font
   {}%                                     % Indent amount
-  {\bfseries\sffamily\scshape}%                   % Theorem head font
+  {\bfseries\sffamily}%                   % Theorem head font
   {.}%                                    % Punctuation after theorem head
   { }%                                    % Space after theorem head, ' ', or \newline
   {}%                                     % Theorem head spec (can be left empty, meaning `normal')

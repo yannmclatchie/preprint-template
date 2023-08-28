@@ -20,7 +20,7 @@
 
 % --- Class structure: declaration of options part
 % ---
-\LoadClass{article}
+\LoadClass[twoside]{article}
 
 % Use custom fonts
 \RequirePackage[utf8]{inputenc}
@@ -36,17 +36,17 @@
 % Section heads and title
 \RequirePackage{titlesec}
 \titleformat{\section}[block]%
-  {\large\sffamily\scshape\centering}
+  {\large\sffamily\mdseries\centering}
   {\thesection.}
   {\baselineskip}
   {}
 \titleformat{\subsection}[runin]%
-  {\bfseries\sffamily\scshape}
+  {\bfseries\sffamily}
   {\thesubsection.}
   {1em}
   {}
 \titleformat{\subsubsection}[runin]%
-  {\sffamily\scshape\mdseries}
+  {\slshape\sffamily}
   {\thesubsubsection.}
   {1em}
   {}
@@ -54,7 +54,7 @@
 
 % Custom abstract
 \RequirePackage[runin]{abstract}
-\renewcommand\abstractnamefont{\bfseries\sffamily\scshape}
+\renewcommand\abstractnamefont{\bfseries\sffamily\mdseries}
 \renewcommand{\abstractname}{Abstract.}
 
 % Blank footnotes for the keywords
@@ -74,7 +74,7 @@
 \begin{center}%
     \vspace*{-5em} %
     \let\footnote\thanks %
-    {\sffamily\scshape\bfseries\Large \@title %
+    {\sffamily\mdseries\bfseries\Large \@title %
       \if\@keywords\@empty\else
         \blankfootnote{\textit{Keywords:}\/ \@keywords}
       \fi %
@@ -132,8 +132,8 @@
 }
 \fancypagestyle{followingpage}{%
 \fancyhf{} % clear all six fields
-\fancyhead[CO]{{\sffamily \scshape \runauthor}}
-\fancyhead[CE]{{\sffamily \scshape \runtitle}}
+\fancyhead[CO]{{\sffamily \mdseries \runauthor}}
+\fancyhead[CE]{{\sffamily \mdseries \runtitle}}
 \fancyfoot[CE,CO]{\sffamily \thepage}
 \renewcommand{\headrulewidth}{0pt}
 \renewcommand{\footrulewidth}{0pt}
@@ -189,7 +189,7 @@
   {}%                                     % Space below
   {\itshape}%                             % Body font
   {}%                                     % Indent amount
-  {\bfseries\sffamily\scshape}%                   % Theorem head font
+  {\bfseries\sffamily\mdseries}%                   % Theorem head font
   {.}%                                    % Punctuation after theorem head
   { }%                                    % Space after theorem head, ' ', or \newline
   {}%                                     % Theorem head spec (can be left empty, meaning `normal')
