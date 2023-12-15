@@ -112,7 +112,7 @@
 \AtBeginDocument{\thispagestyle{firstpage}}
 
 % References
-\RequirePackage[sort]{natbib}
+\RequirePackage{natbib}
 \RequirePackage{etoolbox}
 \bibliographystyle{apalike}
 % 

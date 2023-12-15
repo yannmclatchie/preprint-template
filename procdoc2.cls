@@ -82,14 +82,14 @@
 \RequirePackage[runin]{abstract}
 \setlength{\absleftindent}{0.15\textwidth}
 \setlength{\absrightindent}{\absleftindent}
-\renewcommand\abstractnamefont{\itshape\sffamily}
+\renewcommand\abstractnamefont{\itshape\mdseries\sffamily}
 \abslabeldelim{.\,\,}
 
 % Add keywords
 \newenvironment{keywords}
 {%
   \makeatletter
-  \renewcommand\abstractnamefont{\itshape\sffamily}
+  \renewcommand\abstractnamefont{\itshape\mdseries\sffamily}
   \renewcommand\abstractname{Keywords}
   \abslabeldelim{:\,\,}
   \makeatother

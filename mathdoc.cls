@@ -114,6 +114,8 @@
 % Penalties
 \widowpenalty=10000
 \clubpenalty=10000
+\relpenalty=9999
+\binoppenalty=9999
 
 % Author block
 \RequirePackage{authblk}
@@ -194,3 +196,7 @@
   { }%                                    % Space after theorem head, ' ', or \newline
   {}%                                     % Theorem head spec (can be left empty, meaning `normal')
 \theoremstyle{mathdoc}
+% and the proof
+\RequirePackage{xpatch}
+\xpatchcmd{\proof}{\itshape}{\normalfont\proofnamefont}{}{}
+\newcommand{\proofnamefont}{\sffamily \itshape}

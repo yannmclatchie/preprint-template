@@ -49,7 +49,7 @@
 \newenvironment{keywords}
 {%
   \makeatletter
-  \renewcommand\abstractnamefont{\bfseries\sffamily}
+  \renewcommand\abstractnamefont{\itshape\mdseries\sffamily}
   \renewcommand\abstractname{Keywords}
   \abslabeldelim{:\,\,}
   \makeatother
