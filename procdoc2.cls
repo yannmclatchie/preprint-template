@@ -82,7 +82,7 @@
 \RequirePackage[runin]{abstract}
 \setlength{\absleftindent}{0.15\textwidth}
 \setlength{\absrightindent}{\absleftindent}
-\renewcommand\abstractnamefont{\itshape\mdseries\sffamily}
+\renewcommand\abstractnamefont{\mdseries\sffamily}
 \abslabeldelim{.\,\,}
 
 % Add keywords

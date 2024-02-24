@@ -42,7 +42,7 @@
 
 % make abstract title \sffamily
 \RequirePackage[runin]{abstract}
-\renewcommand\abstractnamefont{\bfseries\sffamily}
+\renewcommand\abstractnamefont{\mdseries\sffamily}
 \abslabeldelim{.\,\,}
 
 % Add keywords
@@ -112,9 +112,9 @@
 % Title
 \def\@maketitle{\vspace*{-0.5in}%
 \vbox{\hsize\textwidth
-%\linewidth\hsize \vskip 0.1in \toptitlebar \centering
+% \linewidth\hsize \vskip 0.1in \toptitlebar \centering
 \noindent{\raggedright\huge\bf\sffamily \@title\par}\vskip \aftertitskip
-%\bottomtitlebar % \vskip 0.1in %  minus
+% \bottomtitlebar % \vskip 0.1in %  minus
 {\large%
  \begin{flushleft}%
     \noindent \@author
