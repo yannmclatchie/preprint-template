@@ -1,9 +1,9 @@
 % predoc.cls
 % Preprint template class
-% 01.09.2022 Yann McLatchie yann.mclatchie (at) aalto.fi
+% 21.03.2024 Yann McLatchie yann.mclatchie.23 (at) ucl.ac.uk
 % --- Class structure: identification part
 % ---
-\ProvidesClass{predoc2}[01.09.2022 version 1.00 Preprint template]
+\ProvidesClass{predoc2}[21.03.2024 version 1.00 Preprint template]
 \NeedsTeXFormat{LaTeX2e}
 
 % --- Class structure: declaration of options part
@@ -36,7 +36,7 @@
 % Section heads and title
 \RequirePackage{titlesec}
 \titleformat*{\section}{\Large\bfseries\sffamily}
-\titleformat*{\subsection}{\large\bfseries\sffamily}
+\titleformat*{\subsection}{\large\sffamily}
 \titleformat*{\subsubsection}{\itshape\sffamily}
 \titleformat*{\paragraph}{\bfseries\sffamily}
 
@@ -70,7 +70,10 @@
 % Page layout
 \RequirePackage[
     a4paper,
-    margin=1in,
+    left=1.25in,
+    right=1.25in,
+    top=0.75in,
+    bottom=0.75in,
     includehead,
     includefoot
 ]{geometry}

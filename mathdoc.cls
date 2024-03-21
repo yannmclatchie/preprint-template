@@ -1,9 +1,9 @@
 % mathdoc.cls
 % Mathematical article template class
-% 01.09.2022 Yann McLatchie yann.mclatchie (at) aalto.fi
+% 21.03.2024 Yann McLatchie yann.mclatchie.23 (at) ucl.ac.uk
 % --- Class structure: identification part
 % ---
-\ProvidesClass{mathdoc}[01.09.2022 version 1.00 Mathematics template]
+\ProvidesClass{mathdoc}[21.03.2024 version 1.00 Mathematics template]
 \NeedsTeXFormat{LaTeX2e}
 
 % --- Class structure: declaration of options part

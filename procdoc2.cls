@@ -1,9 +1,9 @@
 % procdoc.cls
 % Proceedings template class
-% 01.09.2022 Yann McLatchie yann.mclatchie (at) aalto.fi
+% 21.03.2024 Yann McLatchie yann.mclatchie.23 (at) ucl.ac.uk
 % --- Class structure: identification part
 % ---
-\ProvidesClass{procdoc2}[19/07/2023 version 1.00 proceedings template]
+\ProvidesClass{procdoc2}[21.03.2024 version 1.00 proceedings template]
 \NeedsTeXFormat{LaTeX2e}
 
 % --- Class structure: declaration of options part
