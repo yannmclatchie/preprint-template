@@ -35,7 +35,7 @@
 
 % Section heads and title
 \RequirePackage{titlesec}
-\titleformat*{\section}{\Large\bfseries\sffamily}
+\titleformat*{\section}{\large\bfseries\sffamily}
 \titleformat*{\subsection}{\large\sffamily}
 \titleformat*{\subsubsection}{\itshape\sffamily}
 \titleformat*{\paragraph}{\bfseries\sffamily}
@@ -95,7 +95,7 @@
 \fancyhf{} % clear all six fields
 \fancyhead[CO]{{\sffamily \mdseries \runauthor}}
 \fancyhead[CE]{{\sffamily \mdseries \runtitle}}
-\fancyfoot[CE,CO]{\sffamily \thepage}
+\fancyhead[LE,RO]{\sffamily \thepage}
 \renewcommand{\headrulewidth}{0pt}
 \renewcommand{\footrulewidth}{0pt}
 }
