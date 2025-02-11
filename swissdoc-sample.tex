@@ -1,16 +1,26 @@
 \pdfoutput=1 % ensure pdflatex
-\documentclass[10pt,twoside]{mathdoc}
+\documentclass[10pt, twoside]{swissdoc}
 
 % passing the option `sans` will result in sans serif 
 % distribution names
-\usepackage{distoperators}
-% \usepackage[sans]{distoperators}
+% \usepackage{distoperators}
+\usepackage[sans]{distoperators}
 
 % tip: using the `IEEEeqnarray` environment is much nicer
 % than the `aligned` environment
 \usepackage{IEEEtrantools}
 
-% define proposition environment
+% custom proposition environment
+\newtheoremstyle{mystyle}%                % Name
+  {}%                                     % Space above
+  {}%                                     % Space below
+  {\itshape}%                             % Body font
+  {}%                                     % Indent amount
+  {\bfseries\sffamily}%                   % Theorem head font
+  {.}%                                    % Punctuation after theorem head
+  { }%                                    % Space after theorem head, ' ', or \newline
+  {}%                                     % Theorem head spec (can be left empty, meaning `normal')
+\theoremstyle{mystyle}
 \newtheorem{prop}{Proposition}
 % we can define any other amsthm environments and
 % benefit from the same style
@@ -19,45 +29,41 @@
 \usepackage{lipsum}
 
 \title{Sample document}
-\keywords{keyword 1; phrase 2.} % keywords are optional
+% \title{This is a much longer title name than necessary but will be useful to showcase the title block}
 \author[1]{First Author\thanks{This is a thanks footnote.}}
 \author[2]{Second Author}
 \affil[1]{Department One, Institution One, Address One}
 \affil[2]{Department Two, Institution Two, Address Two}
-% \author{First Author}
-% \author{Second Author}
-% \affil{Shared Department, Shared Institution, Shared Address}
+\date{}
+
+% keywords
+\keywords{first topic; another keyword; and a third.}
 
 % set running title and authors
 \makeatletter
-\def\runauthor{F. Author and S. Author}
+\def\runauthor{F. Author et al.}
 \def\runtitle{Running title}
 \makeatother
 
 \begin{document}
 \maketitle
-\thispagestyle{empty}
+\thispagestyle{empty} % TODO: fix this --- shouldn't be needed
 %
 \begin{abstract}
-    \lipsum[11]
+    \lipsum[11]\lipsum[12]
 \end{abstract}
-%
 %
 \section{Ordinary text}
 %
-We reference \citet{KullbackLeibler}, before continuing our discussion.
+We reference \citet{KullbackLeibler}, before continuing our discussion. \lipsum[1-3]
 %
 \subsection{Subsections are in sans serif too}
 %
 \lipsum[2]
 %
-\subsubsection{Even subsubsections are taken care of!}
+\paragraph{Even paragraphs are in sans serif}
 %
 \lipsum[3]
-%
-\paragraph{And paragraphs!}
-%
-\lipsum[11]
 %
 \section{Mathematics}
 %
@@ -68,7 +74,7 @@ We interest ourselves in the variables
     Y\;&\sim\Cauchy(0, 2.5). \nonumber
 \end{IEEEeqnarray}
 %
-Note how much prettier these look.\footnote{They look good to me}
+Note how much prettier these look\footnote{They look good to me}
 
 We have also defined some handy mathematics operators. For example, perhaps the following is true
 %
@@ -78,26 +84,17 @@ We have also defined some handy mathematics operators. For example, perhaps the 
 %
 Now let's get serious with our first proposition.
 %
-\begin{prop}\label{prop:my-prop}
+\begin{prop}
     Equation~\ref{eq:my-eq} is almost always correct under some assumptions.
 \end{prop}
-%
-\begin{proof}[of Proposition~\ref{prop:my-prop}]
-    This is pretty trivial.
-\end{proof}
-%
 
 If we would rather not prove this, then we can talk instead about \elpdPlain, or even \elpdHatPlain if we're feeling fancy. Other mathematics functions can be found in \texttt{distoperators.sty}.
 %
-\begin{appendices}
+\section{Buffer text and its advantages}
 %
-\section{An example appendix}
+\lipsum
 %
-\lipsum[4-12]
-%
-\end{appendices}
-%
-\subsubsection*{Acknowledgments}
+\subsection*{Acknowledgments}
 We acknowledge all kinds of things.
 %
 \bibliography{sample}

@@ -1,9 +1,9 @@
-% mathdoc.cls
-% Mathematical article template class
+% predoc.cls
+% Preprint template class
 % 21.03.2024 Yann McLatchie yann.mclatchie.23 (at) ucl.ac.uk
 % --- Class structure: identification part
 % ---
-\ProvidesClass{mathdoc}[21.03.2024 version 1.00 Mathematics template]
+\ProvidesClass{swissdoc}[21.03.2024 version 1.00 Preprint template]
 \NeedsTeXFormat{LaTeX2e}
 
 % --- Class structure: declaration of options part
@@ -20,12 +20,12 @@
 
 % --- Class structure: declaration of options part
 % ---
-\LoadClass[twoside]{article}
+\LoadClass{article}
 
 % Use custom fonts
 \RequirePackage[utf8]{inputenc}
 \RequirePackage{newtxtext} % times
-\RequirePackage[scaled=.95]{cabin} % sans serif
+\usepackage[scaled]{helvet} % sans serif
 \RequirePackage[varqu,varl]{inconsolata} % typewriter
 \RequirePackage{amsmath,amsthm}
 \RequirePackage[varg]{newtxmath}
@@ -33,29 +33,87 @@
 % Finer resolution type
 \RequirePackage{microtype}
 
+% New line between paragraphs, no indent
+\usepackage[parfill]{parskip}
+
 % Section heads and title
 \RequirePackage{titlesec}
-\titleformat{\section}[block]%
-  {\large\sffamily\mdseries\centering}
-  {\thesection.}
-  {\baselineskip}
-  {}
-\titleformat{\subsection}[runin]%
-  {\bfseries\sffamily}
-  {\thesubsection.}
-  {1em}
-  {}
-\titleformat{\subsubsection}[runin]%
-  {\slshape\sffamily}
-  {\thesubsubsection.}
-  {1em}
-  {}
-\titleformat*{\paragraph}{\itshape\sffamily}
+\RequirePackage{eqparbox}
+% Sections
+\titleformat{\section}{\large\bfseries\sffamily}{\llap{\eqmakebox[S]{\thesection}}}{\marginparsep}{}
+\titlespacing*{\section}{-\marginparsep}{*3.25}{*1.5}%
+% Sub-sections
+\titleformat{\subsection}{\large\sffamily}{\llap{\eqmakebox[S]{\thesubsection}}}{\marginparsep}{}
+\titlespacing*{\subsection}{-\marginparsep}{*3.5}{*2.3}%
+% Paragraphs
+\titleformat*{\paragraph}{\bfseries\sffamily}
 
-% Custom abstract
-\RequirePackage[runin]{abstract}
-\renewcommand\abstractnamefont{\bfseries\sffamily\mdseries}
-\renewcommand{\abstractname}{Abstract.}
+% make abstract title \sffamily
+\RequirePackage{abstract}
+\renewcommand\abstractnamefont{\mdseries\sffamily}
+\abslabeldelim{.}
+\setlength\absleftindent{0pt}
+\setlength\absrightindent{0.25\linewidth}
+\setlength{\absparindent}{0pt}
+\setlength{\absparsep}{0pt}
+\renewcommand{\absnamepos}{flushleft}
+
+% Custom captions
+\RequirePackage{caption}
+\DeclareCaptionFormat{custom}
+{%
+    {\small\sffamily#1#2} {\small #3}
+}
+\DeclareCaptionLabelSeparator{custom}{.}
+\captionsetup{format=custom, labelsep=custom}
+
+% Page layout
+\newlength\muellerwidth 
+\setlength\muellerwidth{1.75cm}
+\RequirePackage[
+    a4paper,
+    left=1\muellerwidth,
+    right=2\muellerwidth,
+    top=1.5\muellerwidth,
+    bottom=3\muellerwidth,
+    % showframe % for dev
+    % includehead,
+    % includefoot
+]{geometry}
+
+% Penalties
+\widowpenalty=10000
+\clubpenalty=10000
+
+% Headers and footers
+\RequirePackage{fancyhdr}
+% \setlength{\headheight}{13.6pt}
+% fancy head
+\fancypagestyle{firstpage}{%
+\fancyhf{} % clear all six fields
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+}
+\fancypagestyle{followingpage}{%
+\fancyhf{} % clear all six fields
+\fancyhead[CO]{{\sffamily \mdseries \runauthor}}
+\fancyhead[CE]{{\sffamily \mdseries \runtitle}}
+\fancyfoot[LO,RE]{\sffamily \thepage}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+}
+\pagestyle{followingpage}
+\AtBeginDocument{\thispagestyle{firstpage}}
+
+%% Changeable parameters.
+\newlength\aftertitskip   
+\setlength\aftertitskip{0.3in plus 0.2in minus 0.2in}
+
+% Author block
+\RequirePackage{authblk}
+\renewcommand{\Authfont}{\normalsize \sffamily}
+\renewcommand{\Affilfont}{\small \mdseries \rmfamily}
+\setlength{\affilsep}{2pt}
 
 % Blank footnotes for the keywords
 \let\svthefootnote\thefootnote
@@ -69,79 +127,22 @@
 % Custom title section
 \makeatletter
 \def\@maketitle{%
-\newpage%
-\null%
-\begin{center}%
-    \vspace*{-5em} %
+    \newpage%
     \let\footnote\thanks %
-    {\sffamily\mdseries\bfseries\Large \@title %
+    {\raggedright\sffamily\mdseries\bfseries\huge \@title %
       \if\@keywords\@empty\else
         \blankfootnote{\textit{Keywords:}\/ \@keywords}
       \fi %
       \par 
+    }%
+    {\large%
+     \begin{flushleft}%
+        \noindent \@author
+     \end{flushleft}%
+    }%
+    \vspace*{0.2\textheight}%
     }
-    {\large
-     \lineskip .5em
-     \begin{tabular}[t]{c}
-        \baselineskip=12pt
-        \@author
-     \end{tabular}
-    }
-\end{center}
-}
 \makeatother
-
-% Custom captions
-\RequirePackage{caption}
-\DeclareCaptionFormat{custom}
-{%
-    {\small\sffamily#1#2} \small #3
-}
-\DeclareCaptionLabelSeparator{custom}{.}
-\captionsetup{format=custom, labelsep=custom}
-
-% Page layout
-\RequirePackage[
-    a4paper,
-    inner=1.2in,
-    outer=1.2in,
-    top=1in,
-    bottom=1in,
-    includehead,
-    includefoot
-]{geometry}
-
-% Penalties
-\widowpenalty=10000
-\clubpenalty=10000
-\relpenalty=9999
-\binoppenalty=9999
-
-% Author block
-\RequirePackage{authblk}
-\renewcommand{\Authfont}{\normalsize \mdseries}
-\renewcommand{\Affilfont}{\small \itshape}
-\setlength{\affilsep}{2pt}
-
-% Headers and footers
-\RequirePackage{fancyhdr}
-\setlength{\headheight}{13.6pt}
-% fancy head
-\fancypagestyle{firstpage}{%
-\fancyhf{} % clear all six fields
-\renewcommand{\headrulewidth}{0pt}
-\renewcommand{\footrulewidth}{0pt}
-}
-\fancypagestyle{followingpage}{%
-\fancyhf{} % clear all six fields
-\fancyhead[CO]{{\sffamily \mdseries \runauthor}}
-\fancyhead[CE]{{\sffamily \mdseries \runtitle}}
-\fancyfoot[CE,CO]{\sffamily \thepage}
-\renewcommand{\headrulewidth}{0pt}
-\renewcommand{\footrulewidth}{0pt}
-}
-\pagestyle{followingpage}
-\AtBeginDocument{\thispagestyle{firstpage}}
 
 % References
 \RequirePackage[sort]{natbib}
@@ -179,11 +180,7 @@
     citecolor=black,      
     urlcolor=black,
 ]{hyperref}
-\RequirePackage{url}
 \renewcommand\UrlFont{\ttfamily}
-
-% Appendices
-\RequirePackage[title]{appendix}
 
 % Mathematical environments
 \newtheoremstyle{mathdoc}%                % Name
@@ -191,24 +188,8 @@
   {}%                                     % Space below
   {\itshape}%                             % Body font
   {}%                                     % Indent amount
-  {\bfseries\sffamily\mdseries}%                   % Theorem head font
+  {\bfseries\sffamily}%                   % Theorem head font
   {.}%                                    % Punctuation after theorem head
   { }%                                    % Space after theorem head, ' ', or \newline
   {}%                                     % Theorem head spec (can be left empty, meaning `normal')
 \theoremstyle{mathdoc}
-% and the proof
-\RequirePackage{xpatch}
-\xpatchcmd{\proof}{\itshape}{\normalfont\proofnamefont}{}{}
-\newcommand{\proofnamefont}{\sffamily \itshape}
-% for custom naming
-\makeatletter
-\renewenvironment{proof}[1][\relax]{\par
-  \pushQED{\qed}%
-  \normalfont \topsep6\p@\@plus6\p@\relax
-  \trivlist
-  \item[\hskip\labelsep\itshape
-    \ifx#1\relax \proofname\else\proofname{} #1\fi\@addpunct{.}]\ignorespaces
-}{%
-  \popQED\endtrivlist\@endpefalse
-}
-\makeatother
