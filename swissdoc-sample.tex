@@ -1,10 +1,13 @@
 \pdfoutput=1 % ensure pdflatex
-\documentclass[10pt, twoside]{swissdoc}
+\documentclass[11pt]{swissdoc}
 
 % passing the option `sans` will result in sans serif 
 % distribution names
 % \usepackage{distoperators}
 \usepackage[sans]{distoperators}
+
+% for ragged right
+\usepackage{ragged2e}
 
 % tip: using the `IEEEeqnarray` environment is much nicer
 % than the `aligned` environment
@@ -27,6 +30,7 @@
 
 % dummy text
 \usepackage{lipsum}
+\usepackage{multicol}
 
 \title{Sample document}
 % \title{This is a much longer title name than necessary but will be useful to showcase the title block}
@@ -46,12 +50,13 @@
 \makeatother
 
 \begin{document}
-\maketitle
-\thispagestyle{empty} % TODO: fix this --- shouldn't be needed
+\RaggedRight
 %
-\begin{abstract}
+\maketitle
+%
+\begin{swabstract}
     \lipsum[11]\lipsum[12]
-\end{abstract}
+\end{swabstract}
 %
 \section{Ordinary text}
 %
@@ -87,6 +92,10 @@ Now let's get serious with our first proposition.
 \begin{prop}
     Equation~\ref{eq:my-eq} is almost always correct under some assumptions.
 \end{prop}
+%
+\begin{proof}
+    This here is my proof.
+\end{proof}
 
 If we would rather not prove this, then we can talk instead about \elpdPlain, or even \elpdHatPlain if we're feeling fancy. Other mathematics functions can be found in \texttt{distoperators.sty}.
 %

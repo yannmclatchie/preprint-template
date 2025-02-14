@@ -41,10 +41,12 @@
 \RequirePackage{eqparbox}
 % Sections
 \titleformat{\section}{\large\bfseries\sffamily}{\llap{\eqmakebox[S]{\thesection}}}{\marginparsep}{}
-\titlespacing*{\section}{-\marginparsep}{*3.25}{*1.5}%
+\titlespacing*{name=\section}{-\marginparsep}{*3.25}{*1.5}
+\titlespacing*{name=\section,numberless}{0pt}{*3.25}{*1.5}
 % Sub-sections
 \titleformat{\subsection}{\large\sffamily}{\llap{\eqmakebox[S]{\thesubsection}}}{\marginparsep}{}
-\titlespacing*{\subsection}{-\marginparsep}{*3.5}{*2.3}%
+\titlespacing*{name=\subsection}{-\marginparsep}{*3.5}{*2.3}
+\titlespacing*{name=\subsection, numberless}{0pt}{*3.5}{*2.3}
 % Paragraphs
 \titleformat*{\paragraph}{\bfseries\sffamily}
 
@@ -53,10 +55,20 @@
 \renewcommand\abstractnamefont{\mdseries\sffamily}
 \abslabeldelim{.}
 \setlength\absleftindent{0pt}
-\setlength\absrightindent{0.25\linewidth}
+\setlength\absrightindent{0.5\textwidth}
 \setlength{\absparindent}{0pt}
 \setlength{\absparsep}{0pt}
 \renewcommand{\absnamepos}{flushleft}
+
+% custom two-columns abstract environment
+\RequirePackage{multicol}
+\setlength{\multicolsep}{\parskip}
+\newenvironment{swabstract}{%
+{\mdseries\sffamily\abstractname}%
+\small%
+\begin{multicols}{2}%
+\noindent%
+}{\end{multicols}}
 
 % Custom captions
 \RequirePackage{caption}
@@ -69,16 +81,15 @@
 
 % Page layout
 \newlength\muellerwidth 
-\setlength\muellerwidth{1.75cm}
+\setlength\muellerwidth{1in}
 \RequirePackage[
     a4paper,
-    left=1\muellerwidth,
-    right=2\muellerwidth,
-    top=1.5\muellerwidth,
-    bottom=3\muellerwidth,
-    % showframe % for dev
-    % includehead,
-    % includefoot
+    left=1.62\muellerwidth,
+    right=1.62\muellerwidth,
+    top=1\muellerwidth,
+    bottom=2\muellerwidth,
+    includehead,
+    % showframe
 ]{geometry}
 
 % Penalties
@@ -88,32 +99,34 @@
 % Headers and footers
 \RequirePackage{fancyhdr}
 % \setlength{\headheight}{13.6pt}
+\setlength{\headsep}{1\muellerwidth}
 % fancy head
-\fancypagestyle{firstpage}{%
-\fancyhf{} % clear all six fields
-\renewcommand{\headrulewidth}{0pt}
-\renewcommand{\footrulewidth}{0pt}
+\fancypagestyle{plain}{%
+  \fancyhf{} % Clear all headers and footers
+  \fancyfoot[R]{\sffamily \thepage}
+  \renewcommand{\headrulewidth}{0pt}
+  \renewcommand{\footrulewidth}{0pt}
 }
 \fancypagestyle{followingpage}{%
 \fancyhf{} % clear all six fields
-\fancyhead[CO]{{\sffamily \mdseries \runauthor}}
-\fancyhead[CE]{{\sffamily \mdseries \runtitle}}
-\fancyfoot[LO,RE]{\sffamily \thepage}
+% make odd/even work without twoside doc
+\fancyhead[L]{%
+\ifodd\value{page}
+{\sffamily \mdseries \runauthor}%
+\else
+{\sffamily \mdseries \runtitle}%
+\fi}
+\fancyfoot[R]{\sffamily \thepage}
 \renewcommand{\headrulewidth}{0pt}
 \renewcommand{\footrulewidth}{0pt}
 }
 \pagestyle{followingpage}
-\AtBeginDocument{\thispagestyle{firstpage}}
-
-%% Changeable parameters.
-\newlength\aftertitskip   
-\setlength\aftertitskip{0.3in plus 0.2in minus 0.2in}
 
 % Author block
 \RequirePackage{authblk}
 \renewcommand{\Authfont}{\normalsize \sffamily}
 \renewcommand{\Affilfont}{\small \mdseries \rmfamily}
-\setlength{\affilsep}{2pt}
+\setlength{\affilsep}{\parskip}
 
 % Blank footnotes for the keywords
 \let\svthefootnote\thefootnote
@@ -128,19 +141,21 @@
 \makeatletter
 \def\@maketitle{%
     \newpage%
+    % align the title with the header
+    \vspace*{-\dimexpr \topmargin + \headheight + \headsep + \topskip\relax}%
     \let\footnote\thanks %
     {\raggedright\sffamily\mdseries\bfseries\huge \@title %
       \if\@keywords\@empty\else
         \blankfootnote{\textit{Keywords:}\/ \@keywords}
       \fi %
-      \par 
+      \par
     }%
     {\large%
      \begin{flushleft}%
         \noindent \@author
      \end{flushleft}%
     }%
-    \vspace*{0.2\textheight}%
+    \vspace*{1\muellerwidth}%
     }
 \makeatother
 
@@ -193,3 +208,10 @@
   { }%                                    % Space after theorem head, ' ', or \newline
   {}%                                     % Theorem head spec (can be left empty, meaning `normal')
 \theoremstyle{mathdoc}
+
+% The proof environment
+\expandafter\let\expandafter\oldproof\csname\string\proof\endcsname
+\let\oldendproof\endproof
+\renewenvironment{proof}[1][\proofname]{%
+  \oldproof[\sffamily \itshape \normalsize #1]%
+}{\oldendproof}
